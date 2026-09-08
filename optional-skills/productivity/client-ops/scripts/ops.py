@@ -11,6 +11,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -100,10 +101,21 @@ def parse_dt(value: str | None) -> datetime | None:
     return None
 
 
+def _has_hint(blob: str, hints: tuple[str, ...]) -> bool:
+    """Word-boundary match so 'voice' does not fire inside 'invoice'."""
+    for hint in hints:
+        token = hint.strip()
+        if not token:
+            continue
+        if re.search(r"(?<!\w)" + re.escape(token) + r"(?!\w)", blob):
+            return True
+    return False
+
+
 def classify_fact(text: str) -> str:
     blob = (text or "").lower()
-    durable = any(h in blob for h in DURABLE_HINTS)
-    transient = any(h in blob for h in TRANSIENT_HINTS)
+    durable = _has_hint(blob, DURABLE_HINTS)
+    transient = _has_hint(blob, TRANSIENT_HINTS)
     if transient and not durable:
         return "transient"
     if durable:

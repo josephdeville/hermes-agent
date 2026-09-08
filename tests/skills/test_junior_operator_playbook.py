@@ -309,6 +309,7 @@ def test_client_ops_memory_split_and_send_gate(store):
     mod = _load_script("client-ops")
     root = str(store / "client-ops")
     assert mod.classify_fact("Follow up Friday about the invoice") == "transient"
+    assert mod.classify_fact("invoice") == "unknown"
     assert mod.classify_fact("Prefers Net-30 billing, always invoice on the 1st") == "durable"
 
     refused = mod.set_pref("acme", "next", "Follow up Friday about the invoice", root)
