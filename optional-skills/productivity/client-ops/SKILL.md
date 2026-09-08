@@ -33,10 +33,25 @@ to mix two clients in one profile.
 
 ## Prerequisites
 
+Helpers the GitHub hub actually downloads (name the real file in
+backticks, not `SKILL_DIR/scripts/ops.py`):
+
+- `scripts/ops.py` — JSON store for calls, actions, and prefs
+- `templates/call.json` — ingest shape
+
 ```bash
-hermes skills install official/productivity/client-ops
-python3 SKILL_DIR/scripts/ops.py init
+hermes skills install josephdeville/hermes-agent/optional-skills/productivity/client-ops --category productivity -y
+# Reinstall after a missing-helper install: add --force
+python3 ~/.hermes/skills/productivity/client-ops/scripts/ops.py init
 ```
+
+`official/productivity/client-ops` only works when this fork is the
+installed Hermes package. `ops.py init` does not need an LLM.
+
+A chat or cron one-shot does: run `hermes model`, or put an API key in
+`${HERMES_HOME:-~/.hermes}/.env` (`OPENROUTER_API_KEY`, `ANTHROPIC_API_KEY`,
+or `OPENAI_API_KEY`). Then `hermes config set model <id>` if no default
+model is set.
 
 Optional: Notion/Google Workspace skills if the user wants actions copied
 into their tracker. The operator JSON store is enough to start.

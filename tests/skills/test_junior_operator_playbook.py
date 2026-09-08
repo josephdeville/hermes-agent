@@ -88,6 +88,37 @@ def test_script_exists_and_compiles(name):
     assert rel in body, f"{name}: SKILL.md does not mention {rel}"
 
 
+def test_hub_github_fetch_would_copy_helpers():
+    """GitHub/URL hub install copies only paths _referenced_support_paths finds.
+
+    `SKILL_DIR/scripts/ops.py` does not match; `` `scripts/ops.py` `` does.
+    Every matched path must exist or GitHub fetch aborts the whole install.
+    """
+    from tools.skills_hub import _referenced_support_paths
+
+    for name, script in SCRIPTS.items():
+        skill_dir = PACK / name
+        body = (skill_dir / "SKILL.md").read_text(encoding="utf-8")
+        refs = _referenced_support_paths(body)
+        assert refs is not None, f"{name}: support-path scan rejected the SKILL.md"
+        rel = f"scripts/{script.name}"
+        assert rel in refs, (
+            f"{name}: hub install would skip {rel}. Name it as `{rel}` "
+            "(backticks or a markdown link), not SKILL_DIR/scripts/..."
+        )
+        for ref in sorted(refs):
+            assert (skill_dir / ref).is_file(), (
+                f"{name}: SKILL.md references {ref} but that file is missing; "
+                "GitHub hub install would fail"
+            )
+        templates = skill_dir / "templates"
+        if templates.is_dir():
+            for path in sorted(templates.iterdir()):
+                if path.is_file() and not path.name.startswith("."):
+                    trel = f"templates/{path.name}"
+                    assert trel in refs, f"{name}: hub install would skip {trel}"
+
+
 def test_related_skills_resolve():
     known = {p.parent.name for p in SKILLS.rglob("SKILL.md")} | {
         p.parent.name for p in OPTIONAL.rglob("SKILL.md")

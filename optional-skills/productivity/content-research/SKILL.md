@@ -32,11 +32,20 @@ replace `youtube-content` (that skill is transcripts → summaries).
 
 ## Prerequisites
 
+Helpers the GitHub hub actually downloads:
+
+- `scripts/briefing.py` — ingest, score, and rank filming ideas
+- `templates/channels.json` — competitor channel list
+
 ```bash
-hermes skills install official/productivity/content-research
-python3 SKILL_DIR/scripts/briefing.py init
-python3 SKILL_DIR/scripts/briefing.py channels-set --file channels.json
+hermes skills install josephdeville/hermes-agent/optional-skills/productivity/content-research --category productivity -y
+python3 ~/.hermes/skills/productivity/content-research/scripts/briefing.py init
+python3 ~/.hermes/skills/productivity/content-research/scripts/briefing.py channels-set --file ~/.hermes/skills/productivity/content-research/templates/channels.json
 ```
+
+`official/productivity/content-research` only works when this fork is the
+installed Hermes package. Chat/cron runs need `hermes model` or an API key
+in `${HERMES_HOME:-~/.hermes}/.env`; `briefing.py init` does not.
 
 You gather stats with `web_search` / `browser_navigate` (or a YouTube API the
 user already has). This script only scores, dedupes, and stores.

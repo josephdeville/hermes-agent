@@ -41,12 +41,21 @@ unattended sending/trading.
 
 ## Prerequisites
 
-Install this hub, then **only the one SOP you will run this month**:
+Install this hub, then **only the one SOP you will run this month**.
+GitHub hub install copies only helpers named in backticks, such as
+`scripts/choose_play.py`.
 
 ```bash
-hermes skills install official/productivity/junior-operator
-hermes skills install official/productivity/prospect-and-draft   # or content-research / trend-scout / market-alert / client-ops
+hermes skills install josephdeville/hermes-agent/optional-skills/productivity/junior-operator --category productivity -y
+hermes skills install josephdeville/hermes-agent/optional-skills/productivity/client-ops --category productivity -y
+# swap client-ops for prospect-and-draft / content-research / trend-scout / market-alert
 ```
+
+`official/productivity/<skill>` only works when this fork is the installed
+Hermes package. Use `--force` to reinstall if a helper script is missing.
+
+Chat and cron runs need an inference provider: `hermes model`, or an API
+key in `${HERMES_HOME:-~/.hermes}/.env`. Store `init` scripts do not.
 
 Gateway must be running for cron (`hermes gateway install`). Durable state
 is written under `${HERMES_HOME:-~/.hermes}/operator/<skill>/` so profiles
