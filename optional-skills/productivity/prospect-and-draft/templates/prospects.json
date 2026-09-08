@@ -1,0 +1,17 @@
+[
+  {
+    "company": "Example Labs",
+    "website": "https://www.examplelabs.com",
+    "segment": "SaaS",
+    "what_they_sell": "Usage-based analytics for API products",
+    "why_they_need_offer": "Their changelog is the only distribution; they have no short-form loop.",
+    "personalized_angle": "Their v2 metering launch is a ready-made 30s demo if you cut it as a founder-led teardown.",
+    "message_variants": [
+      "Congrats on metering v2 — most API companies bury that in a changelog. Would a 30s founder demo help?",
+      "Quick idea: show the before/after invoice on camera. That's the whole story.",
+      "Not a pitch deck — one specific clip from your v2 launch, if useful."
+    ],
+    "source_url": "https://examplelabs.com/blog/metering-v2",
+    "fit_score": 0.82
+  }
+]
