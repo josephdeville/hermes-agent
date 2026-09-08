@@ -1,0 +1,12 @@
+{
+  "client": "acme",
+  "source_call": "2026-09-08 weekly",
+  "follow_up_draft": "Thanks for today — I'll send the revised timeline by Thursday.",
+  "actions": [
+    {"action": "Send revised timeline", "owner": "Alex", "deadline": "2026-09-10"}
+  ],
+  "durable_prefs": [
+    {"key": "billing", "value": "Net-30, invoice on the 1st"}
+  ],
+  "send_approved": false
+}

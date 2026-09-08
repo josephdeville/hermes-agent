@@ -1,0 +1,5 @@
+{
+  "categories": ["crypto", "elections", "ai", "sports", "macro"],
+  "threshold": 0.08,
+  "volume_spike": 3.0
+}

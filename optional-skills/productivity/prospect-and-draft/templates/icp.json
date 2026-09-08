@@ -1,0 +1,8 @@
+{
+  "offer": "A weekly pipeline of short-form content for B2B founders",
+  "segments": ["crypto", "SaaS", "creator tools"],
+  "qualifiers": ["publishes content already", "team smaller than 50", "English-language site"],
+  "disqualifiers": ["agency themselves", "no public site", "already a client"],
+  "voice": "direct, specific, no hype",
+  "daily_cap": 25
+}
