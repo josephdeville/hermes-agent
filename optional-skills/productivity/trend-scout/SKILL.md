@@ -30,11 +30,20 @@ Do not use for evergreen roundups, SEO keyword lists, or auto-posting.
 
 ## Prerequisites
 
+Helpers the GitHub hub actually downloads:
+
+- `scripts/digest.py` — keyword filter, covered-log, HN fetch
+- `templates/keywords.json` — topic terms
+
 ```bash
-hermes skills install official/productivity/trend-scout
-python3 SKILL_DIR/scripts/digest.py init
-python3 SKILL_DIR/scripts/digest.py keywords-set --file keywords.json
+hermes skills install josephdeville/hermes-agent/optional-skills/productivity/trend-scout --category productivity -y
+python3 ~/.hermes/skills/productivity/trend-scout/scripts/digest.py init
+python3 ~/.hermes/skills/productivity/trend-scout/scripts/digest.py keywords-set --file ~/.hermes/skills/productivity/trend-scout/templates/keywords.json
 ```
+
+`official/productivity/trend-scout` only works when this fork is the
+installed Hermes package. Chat/cron runs need `hermes model` or an API key
+in `${HERMES_HOME:-~/.hermes}/.env`; `digest.py init` does not.
 
 Hacker News can be fetched with no key (`fetch-hn`). X/YouTube/news still go
 through `web_search` / `browser_navigate` / RSS, then `digest --file`.

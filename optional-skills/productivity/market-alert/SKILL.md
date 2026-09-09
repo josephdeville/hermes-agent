@@ -32,10 +32,19 @@ cause.
 
 ## Prerequisites
 
+Helpers the GitHub hub actually downloads:
+
+- `scripts/alerts.py` — watchlist, snapshots, anomaly detect
+- `templates/watchlist.json` — markets / categories to poll
+
 ```bash
-hermes skills install official/productivity/market-alert
-python3 SKILL_DIR/scripts/alerts.py init
+hermes skills install josephdeville/hermes-agent/optional-skills/productivity/market-alert --category productivity -y
+python3 ~/.hermes/skills/productivity/market-alert/scripts/alerts.py init
 ```
+
+`official/productivity/market-alert` only works when this fork is the
+installed Hermes package. Chat/cron runs need `hermes model` or an API key
+in `${HERMES_HOME:-~/.hermes}/.env`; `alerts.py init` does not.
 
 Gamma API is public and unauthenticated. **Do not add a trading key to this
 profile.** Per-poll snapshots must persist or a stateless cron run cannot

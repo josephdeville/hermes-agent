@@ -29,10 +29,20 @@ Do not use to scrape or buy contact lists, auto-send cold email, or skip the
 
 ## Prerequisites
 
+Helpers the GitHub hub actually downloads:
+
+- `scripts/pipeline.py` — ICP, prospect table, contacted-domain store
+- `templates/icp.json` — offer / segments / disqualifiers
+- `templates/prospects.json` — upsert row shape
+
 ```bash
-hermes skills install official/productivity/prospect-and-draft
-python3 SKILL_DIR/scripts/pipeline.py init
+hermes skills install josephdeville/hermes-agent/optional-skills/productivity/prospect-and-draft --category productivity -y
+python3 ~/.hermes/skills/productivity/prospect-and-draft/scripts/pipeline.py init
 ```
+
+`official/productivity/prospect-and-draft` only works when this fork is the
+installed Hermes package. Chat/cron runs need `hermes model` or an API key
+in `${HERMES_HOME:-~/.hermes}/.env`; `pipeline.py init` does not.
 
 Put the offer, segments, and disqualifiers in the store (`set-icp`), not in
 MEMORY.md. Previously-contacted domains also live in the store so stateless
